@@ -1,11 +1,12 @@
-from player_reader import PlayerReader
+from enum import Enum
 
-
+class SortBy(Enum):
+    POINTS = 1
+    GOALS = 2
+    ASSISTS = 3
 
 class StatisticsService:
-    def __init__(self):
-        reader = PlayerReader()
-
+    def __init__(self, reader):
         self._players = reader.get_players()
 
     def search(self, name):
@@ -23,21 +24,26 @@ class StatisticsService:
 
         return list(players_of_team)
 
-    def top(self, how_many):
+    def top(self, how_many, sort=SortBy.POINTS):
         # metodin käyttämä apufufunktio voidaan määritellä näin
         def sort_by_points(player):
             return player.points
+        def sort_by_goals(player):
+            return player.goals
+        def sort_by_assists(player):
+            return player.assists
 
+        if sort == SortBy.POINTS:
+            sort_function = sort_by_points
+        elif sort == SortBy.GOALS:
+            sort_function = sort_by_goals
+        elif sort == SortBy.ASSISTS:
+            sort_function = sort_by_assists
+# Some issue with the coverage report not recognising this even though test is present.
         sorted_players = sorted(
             self._players,
             reverse=True,
-            key=sort_by_points
+            key=sort_function
         )
 
-        result = []
-        i = 0
-        while i <= how_many:
-            result.append(sorted_players[i])
-            i += 1
-
-        return result
+        return sorted_players[0:how_many]
