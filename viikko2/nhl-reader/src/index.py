@@ -1,23 +1,24 @@
 import requests
 from player import Player
 
+def is_nation(player):
+    return player.nationality == "FIN"
+
 def main():
     url = "https://studies.cs.helsinki.fi/nhlstats/2024-25/players"
     response = requests.get(url).json()
-
-    print("JSON-muotoinen vastaus:")
-    print(response)
 
     players = []
 
     for player_dict in response:
         player = Player(player_dict)
-        if player.nationality == "FIN":
-            players.append(player)
+        players.append(player)
+    sorted_players = sorted(players, key=lambda x: x.ga, reverse=True)
 
-    print("Oliot:")
+    print("Players from FIN:")
+    filtered_players = filter(is_nation, sorted_players)
 
-    for player in players:
+    for player in filtered_players:
         print(player)
 
 if __name__ == "__main__":

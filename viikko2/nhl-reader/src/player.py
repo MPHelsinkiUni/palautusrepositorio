@@ -7,9 +7,10 @@ class Player:
         self.teams = dict['team']
         self.games = dict['games']
         self.id = dict['id']
+        self.ga = self.goals + self.assists
     
     def __str__(self):
         if self.nationality == "FIN":
-            return f"{self.name} {self.teams} goals {self.goals} assists {self.assists}" 
+            return f"{self.name:20}{self.teams:16}{self.goals:3} +{self.assists:3} = {self.ga}" 
         else: 
             return None 
