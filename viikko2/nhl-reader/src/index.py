@@ -6,14 +6,14 @@ from player_reader import PlayerReader
 from player_stats import PlayerStats
 
 
-def iterator(players, season, nationality):
-    table = Table(title=f"Season {season} players from {nationality}")
+def display_players(players, season, search):
+    table = Table(title=f"Season {season} players: {search}")
 
     table.add_column("Players", justify="left", style="cyan", no_wrap=True)
     table.add_column("Teams", justify="left", style="magenta")
     table.add_column("Goals", justify="right", style="green")
     table.add_column("Assists", justify="right", style="green")
-    table.add_column("G/A", justify="right", style="green")
+    table.add_column("Points", justify="right", style="green")
 
     for player in players:
         table.add_row(
@@ -23,6 +23,30 @@ def iterator(players, season, nationality):
 
     console = Console()
     console.print(table)
+
+
+def search_players(stats):
+    search_type = Prompt.ask(
+        "Search by", choices=["nationality", "team"]
+    )
+    if search_type == "nationality":
+        nationality = Prompt.ask(
+            "Nationality [bold magenta][3-letter FIFA code][/bold magenta]"
+        )
+        return (
+            stats.top_scorers_by_nationality(nationality),
+            f"nationality {nationality}",
+        )
+
+    team = Prompt.ask("Team [bold magenta][3-letter NHL code][/bold magenta]")
+    return stats.top_scorers_by_team(team), f"team {team.upper()}"
+
+
+def run_season(season):
+    url = f"https://studies.cs.helsinki.fi/nhlstats/{season}/players"
+    stats = PlayerStats(PlayerReader(url))
+    players, search = search_players(stats)
+    display_players(players, season, search)
 
 
 def main():
@@ -42,13 +66,7 @@ def main():
         )
         if season not in accepted:
             continue
-        nationality = Prompt.ask(
-            "Nationality [bold magenta][3-letter FIFA code][/bold magenta]"
-        )
-        url = f"https://studies.cs.helsinki.fi/nhlstats/{season}/players"
-        reader = PlayerReader(url)
-        players = PlayerStats(reader).top_scorers_by_nationality(nationality)
-        iterator(players, season, nationality)
+        run_season(season)
 
 
 if __name__ == "__main__":
