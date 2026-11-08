@@ -1,0 +1,22 @@
+[MAIN]
+
+persistent=yes
+
+[FORMAT]
+
+max-line-length=80
+indent-string='    '
+
+[REFACTORING]
+
+max-nested-blocks=2
+max-statements=10
+
+[MESSAGES CONTROL]
+
+disable=missing-module-docstring,missing-class-docstring,missing-function-docstring,redefined-builtin,too-many-instance-attributes,too-few-public-methods
+
+[DESIGN]
+
+max-args=5
+

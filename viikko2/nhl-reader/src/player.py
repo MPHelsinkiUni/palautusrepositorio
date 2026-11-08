@@ -1,16 +1,15 @@
 class Player:
     def __init__(self, dict):
-        self.name = dict['name']
-        self.nationality = dict['nationality']
-        self.assists = dict['assists']
-        self.goals = dict['goals']
-        self.teams = dict['team']
-        self.games = dict['games']
-        self.id = dict['id']
+        self.name = dict["name"]
+        self.nationality = dict["nationality"]
+        self.assists = dict["assists"]
+        self.goals = dict["goals"]
+        self.teams = dict["team"]
+        self.games = dict["games"]
+        self.id = dict["id"]
         self.ga = self.goals + self.assists
-    
+
     def __str__(self):
-        if self.nationality == "FIN":
-            return f"{self.name:20}{self.teams:16}{self.goals:3} +{self.assists:3} = {self.ga}" 
-        else: 
-            return None 
+        return (
+            f"{self.name:20}{self.teams:16}{self.goals:3} +{self.assists:3}"
+        )
