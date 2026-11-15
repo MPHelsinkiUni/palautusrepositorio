@@ -1,0 +1,1 @@
+robot --variable HEADLESS:true src/tests
