@@ -1,0 +1,6 @@
+In a retrospective review, one has to look at what has gone well during a sprint and what hasn't so that it can be improved. It is divided into three approaches:
+1. Start, Stop, Continue, More of, Less of Wheel: what should be started, stopped, or continued, as well as things that should be done more or less of.
+2. Glad, Sad, Mad: What made you sad, glad and mad.
+3. Rounds based which we won't use here.
+
+A retrospective is when you can raise questions because momentum is purposefully throttled so one can discuss what has and has not gone wrong. Since programming in this design is compartmentalised into small pieces, it is an opportunity to ask and implement changes while it is small and still possible. Self-awareness in general is essential for directing a project of any relevant scale because it is that which makes projects coalesce and stick. As programmers, we have a tendency to turn introverted, focused and unwilling to accept or begin working with huge overarching changes quickly in ways interrupt an established workflow, to the point that businesses have been made selling products preserving said workflow or finding another way. Scrum integrates that aspect into retrospectives, hence why it is so useful.
