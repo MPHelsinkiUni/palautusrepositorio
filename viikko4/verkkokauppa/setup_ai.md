@@ -1,0 +1,3 @@
+In my opinion, the agent's repetition was sensible enough and the test code was very legible. That said, it was a bit less legible than before because those functions now call others that you need to check so I was quite mixed on that, but I understand it is a case of 'your mileage may vary'. 
+
+It did not weaken the checks and I did not have to fix it to my non-surprise at this point given the development.
