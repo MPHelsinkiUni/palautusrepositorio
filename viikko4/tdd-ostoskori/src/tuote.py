@@ -12,3 +12,5 @@ class Tuote:
 
     def __repr__(self):
         return f"{self._nimi} hinta {self._hinta} euroa"
+
+## DO not modify the code in this file.
