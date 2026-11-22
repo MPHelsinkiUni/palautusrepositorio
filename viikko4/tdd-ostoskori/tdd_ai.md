@@ -8,4 +8,4 @@ Did the agent at any point try to “cheat”, e.g. by hard-coding the value exp
 - No. But I cannot test this 100% as I preempted this potential occurence by explicitly working it into the prompt, forbidding it from doing exactly that.
 
 Which division of work, A or B, felt better, and why?
-- I like doing things better with AI helping so neither really. I like the feeling of my own hands on code and keyboard.
+- I like doing things better with AI helping so neither really. I like the feeling of my own hands on code and keyboard. To me the code I write alone might not be as good but it is a matter of principle to keep my hands in control as I have had bad experiences with AI but acknolwedge the efficiency argument.
