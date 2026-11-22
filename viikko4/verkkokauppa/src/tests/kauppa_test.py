@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from kauppa import Kauppa
 from tuote import Tuote
+from viitegeneraattori import Viitegeneraattori
 
 
 class TestKauppa(unittest.TestCase):
@@ -56,6 +57,16 @@ class TestKauppa(unittest.TestCase):
             "pekka", 42, "12345", "33333-44455", 10
         )
 
+    def test_poisto_korista_toimii(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.poista_korista(1)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.pankki_mock.tilisiirto.assert_called_with(
+            "pekka", 42, "12345", "33333-44455", 0
+        )
+
     def test_yksi_tuote_on_yksi_ei_ole(self):
         self.varasto_mock.saldo.side_effect = {1: 10, 2: 0}.get
 
@@ -67,3 +78,27 @@ class TestKauppa(unittest.TestCase):
         self.pankki_mock.tilisiirto.assert_called_with(
             "pekka", 42, "12345", "33333-44455", 5
         )
+
+    def test_aloita_asiointi_nollaa_ostokset(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.pankki_mock.tilisiirto.assert_called_with(
+            "pekka", 42, "12345", "33333-44455", 3
+        )
+
+    def test_uusi_liitenumero_joka_siirto(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.assertEqual(self.viitegeneraattori_mock.uusi.call_count, 2)
